@@ -18,7 +18,7 @@ export default function AppRoutes() {
               isActive ? 'underline font-bold' : 'hover:underline'
             }
           >
-            Home
+            HOME
           </NavLink>
           <NavLink
             to="/about"
@@ -26,7 +26,7 @@ export default function AppRoutes() {
               isActive ? 'underline font-bold' : 'hover:underline'
             }
           >
-            About
+            ABOUT
           </NavLink>
         </div>
 
@@ -44,7 +44,7 @@ export default function AppRoutes() {
             }`
           }
         >
-          Login
+          LOGIN
         </NavLink>
       </nav>
 
