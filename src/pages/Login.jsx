@@ -30,17 +30,8 @@ export default function Login() {
       return;
     }
 
-    // Mark this user as logged in
-    localStorage.setItem('currentUser', form.email);
-
     alert('Login successful!');
-
-    const userDetails = localStorage.getItem('userDetails');
-    if (userDetails) {
-      navigate('/userdata'); // Redirect to listing page if data exists
-    } else {
-      navigate('/dashboard'); // Redirect to form if not filled
-    }
+    navigate('/dashboard'); // Redirect on successful login
   };
 
   return (
