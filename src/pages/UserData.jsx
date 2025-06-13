@@ -4,10 +4,14 @@ import { useState, useEffect } from 'react';
 export default function UserData() {
   const navigate = useNavigate();
   const [allUsers, setAllUsers] = useState({});
+  const [loggedInEmail, setLoggedInEmail] = useState('');
 
   useEffect(() => {
     const storedUsers = JSON.parse(localStorage.getItem('allUserDetails') || '{}');
     setAllUsers(storedUsers);
+
+    const loggedIn = localStorage.getItem('loggedInUserEmail') || '';
+    setLoggedInEmail(loggedIn);
   }, []);
 
   const handleAddUser = () => {
@@ -66,20 +70,23 @@ export default function UserData() {
               <li><strong>City:</strong> {user.city}</li>
             </ul>
 
-            <div className="flex space-x-4">
-              <button
-                onClick={() => handleEdit(user.email)}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(user.email)}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-red-600"
-              >
-                Delete
-              </button>
-            </div>
+            {/* Show Edit/Delete buttons ONLY for logged-in user's own data */}
+            {user.email === loggedInEmail && (
+              <div className="flex space-x-4">
+                <button
+                  onClick={() => handleEdit(user.email)}
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(user.email)}
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                >
+                  Delete
+                </button>
+              </div>
+            )}
           </div>
         ))}
       </div>
