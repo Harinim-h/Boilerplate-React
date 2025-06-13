@@ -58,7 +58,7 @@ export default function UserData() {
             key={user.email}
             className="mb-4 border-b border-sky-300 pb-4 last:border-b-0"
           >
-            <ul className="text-purple-950 text-2xl mb-2">
+            <ul className="text-purple-950 text-2xl mb-6">
               <li><strong>Name:</strong> {user.name}</li>
               <li><strong>Phone:</strong> {user.phone}</li>
               <li><strong>Email:</strong> {user.email}</li>
