@@ -10,7 +10,7 @@ import UserData from '../pages/UserData.jsx';
 export default function AppRoutes() {
   return (
     <BrowserRouter>
-      <nav className="bg-purple-950 text-white px-6 py-4 flex items-center text-xl font-bold">
+      <nav className="bg-purple-950 text-purple-200 px-6 py-4 flex items-center text-xl font-bold">
         {/* Left links */}
         <div className="flex space-x-6">
           <NavLink
@@ -37,7 +37,7 @@ export default function AppRoutes() {
           className={({ isActive }) =>
             `px-4 py-2 rounded font-semibold transition-colors ${
               isActive
-                ? 'bg-blue-600 hover:bg-blue-700'
+                ? 'bg-blue-600 hover:bg-blue-300'
                 : 'bg-blue-500 hover:bg-blue-600'
             }`
           }

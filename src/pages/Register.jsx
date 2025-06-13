@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 const allowedUsers = [
-  { email: 'user1@example.com', password: 'pass1' },
-  { email: 'user2@example.com', password: 'pass2' },
-  { email: 'user3@example.com', password: 'pass3' },
-  { email: 'user4@example.com', password: 'pass4' },
+  { email: 'abc@gmail.com', password: '123' },
+  { email: 'harinim@gmail.com', password: '123' },
+  { email: 'user@gmail.com', password: '123' },
+  { email: 'user1@gmail.com', password: '123' },
 ];
 
 export default function Register() {
@@ -23,7 +23,7 @@ export default function Register() {
     );
 
     if (!matchedUser) {
-      setError('Only 4 predefined users can register. Check email and password.');
+      setError('Invalid! Check email and password.');
       return;
     }
 
@@ -33,17 +33,17 @@ export default function Register() {
     }
 
     localStorage.setItem(email, JSON.stringify({ email, password }));
-    alert('Registered successfully!');
+    
     navigate('/login');
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-sky-200">
+    <div className="min-h-screen flex items-center justify-center bg-purple-200">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded shadow-md w-full max-w-md"
+        className="bg-violet-400 p-8 rounded shadow-md w-full max-w-md"
       >
-        <h2 className="text-2xl font-bold text-center mb-4 text-sky-800">Register</h2>
+        <h2 className="text-2xl font-bold text-center mb-4 text-purple-950">Register</h2>
 
         <input
           type="email"
@@ -51,7 +51,7 @@ export default function Register() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
-          className="w-full p-2 mb-3 border border-sky-300 rounded"
+          className="w-full p-2 mb-3 border border-violet-300 rounded"
         />
 
         <input
@@ -60,14 +60,14 @@ export default function Register() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
-          className="w-full p-2 mb-3 border border-sky-300 rounded"
+          className="w-full p-2 mb-3 border border-violet-300 rounded"
         />
 
         {error && <p className="text-red-500 text-sm mb-3 text-center">{error}</p>}
 
         <button
           type="submit"
-          className="w-full bg-sky-500 text-white py-2 rounded hover:bg-sky-600"
+          className="w-full bg-purple-950 text-white py-2 rounded hover:bg-sky-600"
         >
           REGISTER
         </button>

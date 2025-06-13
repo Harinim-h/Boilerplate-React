@@ -57,12 +57,12 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-sky-100">
+    <div className="min-h-screen flex items-center justify-center bg-purple-500">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded shadow w-full max-w-md"
+        className="bg-white p-6 rounded shadow w-full max-w-md bg-purple-200"
       >
-        <h2 className="text-2xl font-bold mb-4 text-sky-800">Enter Your Details</h2>
+        <h2 className="text-2xl font-bold mb-4 text-purple-950">Enter Details</h2>
 
         <input
           name="name"
@@ -70,7 +70,7 @@ export default function Dashboard() {
           onChange={handleChange}
           required
           placeholder="Name"
-          className="w-full p-2 mb-3 border border-sky-300 rounded"
+          className="w-full p-2 mb-3 border border-purple-200 rounded"
         />
 
         <input
@@ -79,7 +79,7 @@ export default function Dashboard() {
           onChange={handleChange}
           required
           placeholder="Phone Number"
-          className="w-full p-2 mb-3 border border-sky-300 rounded"
+          className="w-full p-2 mb-3 border border-purple-200 rounded"
         />
 
         <input
@@ -88,7 +88,7 @@ export default function Dashboard() {
           onChange={handleChange}
           required
           placeholder="Email"
-          className="w-full p-2 mb-3 border border-sky-300 rounded"
+          className="w-full p-2 mb-3 border border-purple-200 rounded"
           disabled={!!localStorage.getItem('editingUserEmail')} // Prevent email change while editing
         />
 
@@ -97,7 +97,7 @@ export default function Dashboard() {
           value={form.state}
           onChange={handleChange}
           required
-          className="w-full p-2 mb-3 border border-sky-300 rounded"
+          className="w-full p-2 mb-3 border border-purple-200 rounded"
         >
           <option value="">Select State</option>
           {Object.keys(statesWithCities).map((state) => (
@@ -112,7 +112,7 @@ export default function Dashboard() {
           value={form.city}
           onChange={handleChange}
           required
-          className="w-full p-2 mb-3 border border-sky-300 rounded"
+          className="w-full p-2 mb-3 border border-purple-200 rounded"
           disabled={!form.state}
         >
           <option value="">Select City</option>
@@ -126,7 +126,7 @@ export default function Dashboard() {
 
         <button
           type="submit"
-          className="w-full bg-sky-500 text-white py-2 rounded hover:bg-sky-600"
+          className="w-full bg-purple-950 text-white py-2 rounded hover:bg-sky-600"
         >
           SUBMIT
         </button>

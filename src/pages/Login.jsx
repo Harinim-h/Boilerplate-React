@@ -33,19 +33,19 @@ export default function Login() {
     // Save logged in user email
     localStorage.setItem('loggedInUserEmail', form.email);
 
-    alert('Login successful!');
+    
 
     // Always navigate directly to userdata page after login
     navigate('/userdata');
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-sky-200">
+    <div className="min-h-screen flex items-center justify-center bg-purple-200">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded shadow-md w-full max-w-md"
+        className="bg-violet-400 p-8 rounded shadow-md w-full max-w-md"
       >
-        <h2 className="text-2xl font-bold text-center mb-4 text-sky-800">Login</h2>
+        <h2 className="text-3xl font-bold text-center mb-4 text-purple-950">Login</h2>
 
         <input
           name="email"
@@ -54,7 +54,7 @@ export default function Login() {
           onChange={handleChange}
           placeholder="Email"
           required
-          className="w-full p-2 mb-3 border border-sky-300 rounded"
+          className="w-full p-2 mb-3 border border-violet-400 rounded"
         />
         <input
           name="password"
@@ -63,19 +63,19 @@ export default function Login() {
           onChange={handleChange}
           placeholder="Password"
           required
-          className="w-full p-2 mb-3 border border-sky-300 rounded"
+          className="w-full p-2 mb-3 border border-violet-400 rounded"
         />
 
         {error && <p className="text-red-500 text-sm mb-3 text-center">{error}</p>}
 
         <button
           type="submit"
-          className="w-full bg-sky-500 text-white py-2 rounded hover:bg-sky-600"
+          className="w-full bg-purple-950 text-white py-2 rounded hover:bg-blue-600"
         >
           LOGIN
         </button>
 
-        <p className="text-center mt-4 text-gray-900">
+        <p className="text-center mt-4 text-gray-950">
           Don't have an account?{' '}
           <Link to="/register" className="underline font-semibold">Register here</Link>
         </p>
