@@ -17,19 +17,20 @@ export default function Dashboard() {
     city: '',
   });
 
+  // 🔁 On mount, check if already filled and not editing
   useEffect(() => {
-    const isEditing = localStorage.getItem('isEditing') === 'true';
+    const editing = localStorage.getItem('editing'); // if set, we're editing
     const userDetails = localStorage.getItem('userDetails');
 
-    if (userDetails && !isEditing) {
-      // If data exists and not editing, redirect to listing
-      navigate('/userdata');
-    } else if (userDetails && isEditing) {
-      // If editing, prefill form and remove flag
-      setForm(JSON.parse(userDetails));
-      localStorage.removeItem('isEditing');
+    if (userDetails && !editing) {
+      navigate('/userdata'); // not editing but data exists → redirect
     }
-  }, [navigate]);
+
+    if (userDetails && editing) {
+      const parsed = JSON.parse(userDetails);
+      setForm(parsed); // pre-fill form with existing data
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,6 +40,7 @@ export default function Dashboard() {
   const handleSubmit = (e) => {
     e.preventDefault();
     localStorage.setItem('userDetails', JSON.stringify(form));
+    localStorage.removeItem('editing'); // Done editing
     navigate('/userdata');
   };
 
@@ -47,38 +49,22 @@ export default function Dashboard() {
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow w-full max-w-md">
         <h2 className="text-2xl font-bold mb-4 text-sky-800">Enter Your Details</h2>
 
-        <input
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          required
+        <input name="name" value={form.name} onChange={handleChange} required
           placeholder="Name"
           className="w-full p-2 mb-3 border border-sky-300 rounded"
         />
 
-        <input
-          name="phone"
-          value={form.phone}
-          onChange={handleChange}
-          required
+        <input name="phone" value={form.phone} onChange={handleChange} required
           placeholder="Phone Number"
           className="w-full p-2 mb-3 border border-sky-300 rounded"
         />
 
-        <input
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          required
+        <input name="email" value={form.email} onChange={handleChange} required
           placeholder="Email"
           className="w-full p-2 mb-3 border border-sky-300 rounded"
         />
 
-        <select
-          name="state"
-          value={form.state}
-          onChange={handleChange}
-          required
+        <select name="state" value={form.state} onChange={handleChange} required
           className="w-full p-2 mb-3 border border-sky-300 rounded"
         >
           <option value="">Select State</option>
@@ -87,13 +73,9 @@ export default function Dashboard() {
           ))}
         </select>
 
-        <select
-          name="city"
-          value={form.city}
-          onChange={handleChange}
-          required
-          disabled={!form.state}
+        <select name="city" value={form.city} onChange={handleChange} required
           className="w-full p-2 mb-3 border border-sky-300 rounded"
+          disabled={!form.state}
         >
           <option value="">Select City</option>
           {form.state &&
@@ -102,10 +84,7 @@ export default function Dashboard() {
             ))}
         </select>
 
-        <button
-          type="submit"
-          className="w-full bg-sky-500 text-white py-2 rounded hover:bg-sky-600"
-        >
+        <button type="submit" className="w-full bg-sky-500 text-white py-2 rounded hover:bg-sky-600">
           Submit
         </button>
       </form>
