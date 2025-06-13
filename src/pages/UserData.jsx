@@ -1,0 +1,54 @@
+import { useNavigate } from 'react-router-dom';
+
+export default function UserData() {
+  const navigate = useNavigate();
+  const userData = JSON.parse(localStorage.getItem('userDetails'));
+
+  if (!userData) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-xl">
+        No user data found.
+      </div>
+    );
+  }
+
+  const handleEdit = () => {
+    navigate('/dashboard'); // Go back to dashboard for editing
+  };
+
+  const handleDelete = () => {
+    localStorage.removeItem('userDetails');
+    alert('User data deleted.');
+    navigate('/dashboard');
+  };
+
+  return (
+    <div className="min-h-screen bg-sky-100 flex items-center justify-center">
+      <div className="bg-white p-6 rounded shadow max-w-md w-full">
+        <h2 className="text-2xl font-bold mb-4 text-sky-800 text-center">Your Submitted Details</h2>
+        <ul className="text-sky-700 mb-4">
+          <li><strong>Name:</strong> {userData.name}</li>
+          <li><strong>Phone:</strong> {userData.phone}</li>
+          <li><strong>Email:</strong> {userData.email}</li>
+          <li><strong>State:</strong> {userData.state}</li>
+          <li><strong>City:</strong> {userData.city}</li>
+        </ul>
+
+        <div className="flex justify-between">
+          <button
+            onClick={handleEdit}
+            className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+          >
+            Edit
+          </button>
+          <button
+            onClick={handleDelete}
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

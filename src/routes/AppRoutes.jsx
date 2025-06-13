@@ -3,7 +3,9 @@ import Home from '../pages/Home.jsx'
 import About from '../pages/About.jsx'
 import Login from '../pages/Login.jsx'
 import Register from '../pages/Register.jsx'
-import Dashboard from '../pages/Dashboard.jsx';
+import Dashboard from '../pages/Dashboard.jsx'
+import UserData from '../pages/UserData.jsx';
+
 
 export default function AppRoutes() {
   return (
@@ -54,6 +56,8 @@ export default function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/userdata" element={<UserData />} />
+
       </Routes>
     </BrowserRouter>
   )
