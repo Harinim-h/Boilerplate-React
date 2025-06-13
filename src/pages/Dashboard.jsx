@@ -18,10 +18,13 @@ export default function Dashboard() {
   });
 
   useEffect(() => {
-    const userDetails = localStorage.getItem('userDetails');
-    if (userDetails) {
-      const parsed = JSON.parse(userDetails);
-      setForm(parsed);
+    // If editing existing user detail, prefill form
+    const editingEmail = localStorage.getItem('editingUserEmail');
+    if (editingEmail) {
+      const allUserDetails = JSON.parse(localStorage.getItem('allUserDetails') || '{}');
+      if (allUserDetails[editingEmail]) {
+        setForm(allUserDetails[editingEmail]);
+      }
     }
   }, []);
 
@@ -37,7 +40,19 @@ export default function Dashboard() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem('userDetails', JSON.stringify(form));
+
+    // Get existing allUserDetails or empty object
+    const allUserDetails = JSON.parse(localStorage.getItem('allUserDetails') || '{}');
+
+    // Save/update current user's details using email as key
+    allUserDetails[form.email] = form;
+
+    // Save all details back to localStorage
+    localStorage.setItem('allUserDetails', JSON.stringify(allUserDetails));
+
+    // Clear editing flag if any
+    localStorage.removeItem('editingUserEmail');
+
     navigate('/userdata');
   };
 
@@ -74,6 +89,7 @@ export default function Dashboard() {
           required
           placeholder="Email"
           className="w-full p-2 mb-3 border border-sky-300 rounded"
+          disabled={!!localStorage.getItem('editingUserEmail')} // Prevent email change while editing
         />
 
         <select

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const allowedUsers = [
   { email: 'user1@example.com', password: 'pass1' },
@@ -38,33 +38,44 @@ export default function Register() {
   };
 
   return (
-    <div className="max-w-sm mx-auto mt-10 p-6 bg-white rounded-md shadow-md">
-      <h1 className="text-3xl font-bold mb-6 text-center">REGISTER</h1>
-      {error && <p className="text-red-600 mb-4 text-center">{error}</p>}
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label className="block mb-2 font-semibold text-gray-700 text-[25px]">Email</label>
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-auto px-4 py-2 border border-gray-300 rounded-md"
-          />
-        </div>
-        <div>
-          <label className="block mb-2 font-semibold text-gray-700 text-[25px]">Password</label>
-          <input
-            type="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-auto px-4 py-2 border border-gray-300 rounded-md"
-          />
-        </div>
-        <button className="w-auto border-2 border-blue-600 text-blue-600 font-semibold py-2 rounded-md hover:bg-blue-600 hover:text-white">
+    <div className="min-h-screen flex items-center justify-center bg-sky-200">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded shadow-md w-full max-w-md"
+      >
+        <h2 className="text-2xl font-bold text-center mb-4 text-sky-800">Register</h2>
+
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          className="w-full p-2 mb-3 border border-sky-300 rounded"
+        />
+
+        <input
+          type="password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          className="w-full p-2 mb-3 border border-sky-300 rounded"
+        />
+
+        {error && <p className="text-red-500 text-sm mb-3 text-center">{error}</p>}
+
+        <button
+          type="submit"
+          className="w-full bg-sky-500 text-white py-2 rounded hover:bg-sky-600"
+        >
           REGISTER
         </button>
+
+        <p className="text-center mt-4 text-gray-900">
+          Already have an account?{' '}
+          <Link to="/login" className="underline font-semibold">Login here</Link>
+        </p>
       </form>
     </div>
   );
