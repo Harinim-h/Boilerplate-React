@@ -56,9 +56,9 @@ export default function UserData() {
         {Object.values(allUsers).map((user) => (
           <div
             key={user.email}
-            className="mb-4 border-b border-sky-300 pb-4 last:border-b-0"
+            className="mb-9 border-b border-purple-300 pb-4 last:border-b-0"
           >
-            <ul className="text-purple-950 text-2xl mb-9">
+            <ul className="text-purple-950 text-2xl bg-purple-200 mb-9">
               <li><strong>Name:</strong> {user.name}</li>
               <li><strong>Phone:</strong> {user.phone}</li>
               <li><strong>Email:</strong> {user.email}</li>
@@ -66,7 +66,7 @@ export default function UserData() {
               <li><strong>City:</strong> {user.city}</li>
             </ul>
 
-            <div className="flex space-x-4">
+            <div className="flex space-x-8">
               <button
                 onClick={() => handleEdit(user.email)}
                 className="bg-purple-950 text-white px-4 py-2 rounded hover:bg-blue-600"
