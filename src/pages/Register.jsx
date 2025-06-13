@@ -35,7 +35,7 @@ export default function Register() {
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded shadow-md w-full max-w-md"
       >
-        <h2 className="text-2xl font-bold text-center mb-4 text-sky-800">Register</h2>
+        <h2 className="text-2xl font-bold text-center mb-4 text-sky-800">REGISTER</h2>
 
         <input
           name="email"
