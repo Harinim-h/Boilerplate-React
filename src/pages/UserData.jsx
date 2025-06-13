@@ -1,54 +1,114 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function UserData() {
+const statesWithCities = {
+  'Tamil Nadu': ['Chennai', 'Coimbatore', 'Trichy', 'Karur'],
+  'Karnataka': ['Bangalore', 'Mysore', 'Mangalore'],
+  'Kerala': ['Kochi', 'Thiruvananthapuram', 'Kozhikode'],
+};
+
+export default function Dashboard() {
   const navigate = useNavigate();
-  const userData = JSON.parse(localStorage.getItem('userDetails'));
+  const [form, setForm] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    state: '',
+    city: '',
+  });
 
-  if (!userData) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-xl">
-        No user data found.
-      </div>
-    );
-  }
+  useEffect(() => {
+    const isEditing = localStorage.getItem('isEditing') === 'true';
+    const userDetails = localStorage.getItem('userDetails');
 
-  const handleEdit = () => {
-    navigate('/dashboard'); // Go back to dashboard for editing
+    if (userDetails && !isEditing) {
+      // If data exists and not editing, redirect to listing
+      navigate('/userdata');
+    } else if (userDetails && isEditing) {
+      // If editing, prefill form and remove flag
+      setForm(JSON.parse(userDetails));
+      localStorage.removeItem('isEditing');
+    }
+  }, [navigate]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
   };
 
-  const handleDelete = () => {
-    localStorage.removeItem('userDetails');
-    alert('User data deleted.');
-    navigate('/dashboard');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    localStorage.setItem('userDetails', JSON.stringify(form));
+    navigate('/userdata');
   };
 
   return (
-    <div className="min-h-screen bg-sky-100 flex items-center justify-center">
-      <div className="bg-white p-6 rounded shadow max-w-md w-full">
-        <h2 className="text-2xl font-bold mb-4 text-sky-800 text-center">Your Submitted Details</h2>
-        <ul className="text-sky-700 mb-4">
-          <li><strong>Name:</strong> {userData.name}</li>
-          <li><strong>Phone:</strong> {userData.phone}</li>
-          <li><strong>Email:</strong> {userData.email}</li>
-          <li><strong>State:</strong> {userData.state}</li>
-          <li><strong>City:</strong> {userData.city}</li>
-        </ul>
+    <div className="min-h-screen flex items-center justify-center bg-sky-100">
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-4 text-sky-800">Enter Your Details</h2>
 
-        <div className="flex justify-between">
-          <button
-            onClick={handleEdit}
-            className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
-          >
-            Edit
-          </button>
-          <button
-            onClick={handleDelete}
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-          >
-            Delete
-          </button>
-        </div>
-      </div>
+        <input
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          required
+          placeholder="Name"
+          className="w-full p-2 mb-3 border border-sky-300 rounded"
+        />
+
+        <input
+          name="phone"
+          value={form.phone}
+          onChange={handleChange}
+          required
+          placeholder="Phone Number"
+          className="w-full p-2 mb-3 border border-sky-300 rounded"
+        />
+
+        <input
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          required
+          placeholder="Email"
+          className="w-full p-2 mb-3 border border-sky-300 rounded"
+        />
+
+        <select
+          name="state"
+          value={form.state}
+          onChange={handleChange}
+          required
+          className="w-full p-2 mb-3 border border-sky-300 rounded"
+        >
+          <option value="">Select State</option>
+          {Object.keys(statesWithCities).map((state) => (
+            <option key={state} value={state}>{state}</option>
+          ))}
+        </select>
+
+        <select
+          name="city"
+          value={form.city}
+          onChange={handleChange}
+          required
+          disabled={!form.state}
+          className="w-full p-2 mb-3 border border-sky-300 rounded"
+        >
+          <option value="">Select City</option>
+          {form.state &&
+            statesWithCities[form.state].map((city) => (
+              <option key={city} value={city}>{city}</option>
+            ))}
+        </select>
+
+        <button
+          type="submit"
+          className="w-full bg-sky-500 text-white py-2 rounded hover:bg-sky-600"
+        >
+          Submit
+        </button>
+      </form>
     </div>
   );
 }
