@@ -62,10 +62,10 @@ export default function Register() {
           type="submit"
           className="w-full bg-sky-500 text-white py-2 rounded hover:bg-sky-600"
         >
-          Register
+          REGISTER
         </button>
 
-        <p className="text-center mt-4 text-sky-700">
+        <p className="text-center mt-4 text-gray-900">
           Already have an account?{' '}
           <Link to="/login" className="underline font-semibold">Login</Link>
         </p>

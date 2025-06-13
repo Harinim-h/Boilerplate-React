@@ -112,7 +112,7 @@ export default function Dashboard() {
           type="submit"
           className="w-full bg-sky-500 text-white py-2 rounded hover:bg-sky-600"
         >
-          Submit
+          SUBMIT
         </button>
       </form>
     </div>

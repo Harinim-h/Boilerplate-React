@@ -6,7 +6,7 @@ export default function UserData() {
 
   if (!userData) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-xl">
+      <div className="min-h-screen flex items-center justify-center text-2xl">
         No user data found.
       </div>
     );
@@ -27,7 +27,7 @@ export default function UserData() {
   return (
     <div className="min-h-screen bg-sky-100 flex items-center justify-center">
       <div className="bg-white p-6 rounded shadow max-w-md w-full">
-        <h2 className="text-2xl font-bold mb-4 text-sky-800 text-center">Your Submitted Details</h2>
+        <h2 className="text-2xl font-bold mb-4 text-sky-800 text-center">USER DETAILS</h2>
         <ul className="text-sky-700 mb-4">
           <li><strong>Name:</strong> {userData.name}</li>
           <li><strong>Phone:</strong> {userData.phone}</li>
@@ -39,15 +39,15 @@ export default function UserData() {
         <div className="flex justify-between">
           <button
             onClick={handleEdit}
-            className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
           >
-            Edit
+            EDIT
           </button>
           <button
             onClick={handleDelete}
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-red-600"
           >
-            Delete
+            DELETE
           </button>
         </div>
       </div>

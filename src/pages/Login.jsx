@@ -75,10 +75,10 @@ export default function Login() {
           type="submit"
           className="w-full bg-sky-500 text-white py-2 rounded hover:bg-sky-600"
         >
-          Login
+          LOGIN
         </button>
 
-        <p className="text-center mt-4 text-sky-700">
+        <p className="text-center mt-4 text-gray-900">
           Don't have an account?{' '}
           <Link to="/register" className="underline font-semibold">Register here</Link>
         </p>
