@@ -30,16 +30,13 @@ export default function Login() {
       return;
     }
 
+    // Save logged in user email
+    localStorage.setItem('loggedInUserEmail', form.email);
+
     alert('Login successful!');
 
-    // Check if user details are stored
-    const userDetails = localStorage.getItem('userDetails');
-
-    if (userDetails) {
-      navigate('/userdata'); // if details exist, go to listing page
-    } else {
-      navigate('/dashboard'); // else go to form page
-    }
+    // Always navigate directly to userdata page after login
+    navigate('/userdata');
   };
 
   return (

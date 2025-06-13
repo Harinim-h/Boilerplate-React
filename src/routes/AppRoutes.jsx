@@ -10,23 +10,19 @@ import UserData from '../pages/UserData.jsx';
 export default function AppRoutes() {
   return (
     <BrowserRouter>
-      <nav className="bg-black text-white px-6 py-4 flex items-center">
+      <nav className="bg-purple-950 text-white px-6 py-4 flex items-center text-xl font-bold">
         {/* Left links */}
         <div className="flex space-x-6">
           <NavLink
             to="/"
             end
-            className={({ isActive }) =>
-              isActive ? 'underline font-bold' : 'hover:underline'
-            }
+            
           >
             HOME
           </NavLink>
           <NavLink
             to="/about"
-            className={({ isActive }) =>
-              isActive ? 'underline font-bold' : 'hover:underline'
-            }
+            
           >
             ABOUT
           </NavLink>

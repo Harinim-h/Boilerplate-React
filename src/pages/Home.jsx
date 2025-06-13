@@ -1,24 +1,21 @@
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-600 text-gray-100 px-6">
-      <h1 className="text-4xl font-bold text-gray-100 mb-6 drop-shadow-lg">
-        Welcome to the React Boilerplate
+    <div className="min-h-screen flex flex-col items-center justify-center bg-purple-400 text-gray-100 px-6">
+      <h1 className="text-4xl font-bold text-purple-950 mb-6 drop-shadow-lg">
+        Welcome to the React Boilerplate!
       </h1>
 
-      <p className="text-lg text-gray-300 leading-relaxed mb-6 max-w-xl text-center drop-shadow-md">
+      <p className="text-lg text-purple-950 leading-relaxed mb-6 max-w-xl text-center drop-shadow-md">
         This boilerplate helps you quickly start building React apps with modern tools like Vite, Tailwind CSS, and React Router.
       </p>
 
       <div className="mb-8 max-w-xl">
-        <h2 className="text-2xl font-semibold text-gray-200 mb-4 drop-shadow">
+        <h2 className="text-2xl font-semibold text-purple-950 mb-4 drop-shadow text-center">
           Features Included:
         </h2>
-        <ul className="list-disc list-inside text-gray-300 text-base space-y-2 drop-shadow-md">
-          <li>Vite for fast development and build.</li>
-          <li>Tailwind CSS for styling.</li>
-          <li>React Router for navigation.</li>
-          <li>Sample pages: Home, About, Login and Register.</li>
-        </ul>
+        <p className="list-disc list-inside text-purple-950 text-base space-y-2 text-lg text-center drop-shadow-md">
+          Vite for fast development and build.Tailwind CSS for styling.React Router for navigation.Sample pages: Home, About, Login and Register.
+        </p>
       </div>
     </div>
   );
