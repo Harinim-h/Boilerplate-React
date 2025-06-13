@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 const statesWithCities = {
   'Tamil Nadu': ['Chennai', 'Coimbatore', 'Trichy', 'Karur'],
-  'Karnataka': ['Bangalore', 'Mysore', 'Mangalore'],
-  'Kerala': ['Kochi', 'Thiruvananthapuram', 'Kozhikode'],
+  Karnataka: ['Bangalore', 'Mysore', 'Mangalore'],
+  Kerala: ['Kochi', 'Thiruvananthapuram', 'Kozhikode'],
 };
 
 export default function Dashboard() {
@@ -20,7 +20,6 @@ export default function Dashboard() {
   useEffect(() => {
     const userDetails = localStorage.getItem('userDetails');
     if (userDetails) {
-      // Instead of redirecting, prefill form with existing data
       const parsed = JSON.parse(userDetails);
       setForm(parsed);
     }
@@ -28,7 +27,12 @@ export default function Dashboard() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+    if (name === 'state') {
+      // Reset city when state changes
+      setForm({ ...form, state: value, city: '' });
+    } else {
+      setForm({ ...form, [name]: value });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -39,7 +43,10 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-sky-100">
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow w-full max-w-md">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-6 rounded shadow w-full max-w-md"
+      >
         <h2 className="text-2xl font-bold mb-4 text-sky-800">Enter Your Details</h2>
 
         <input
@@ -78,7 +85,9 @@ export default function Dashboard() {
         >
           <option value="">Select State</option>
           {Object.keys(statesWithCities).map((state) => (
-            <option key={state} value={state}>{state}</option>
+            <option key={state} value={state}>
+              {state}
+            </option>
           ))}
         </select>
 
@@ -93,11 +102,16 @@ export default function Dashboard() {
           <option value="">Select City</option>
           {form.state &&
             statesWithCities[form.state].map((city) => (
-              <option key={city} value={city}>{city}</option>
+              <option key={city} value={city}>
+                {city}
+              </option>
             ))}
         </select>
 
-        <button type="submit" className="w-full bg-sky-500 text-white py-2 rounded hover:bg-sky-600">
+        <button
+          type="submit"
+          className="w-full bg-sky-500 text-white py-2 rounded hover:bg-sky-600"
+        >
           Submit
         </button>
       </form>

@@ -31,7 +31,15 @@ export default function Login() {
     }
 
     alert('Login successful!');
-    navigate('/dashboard'); // Redirect on successful login
+
+    // Check if user details are stored
+    const userDetails = localStorage.getItem('userDetails');
+
+    if (userDetails) {
+      navigate('/userdata'); // if details exist, go to listing page
+    } else {
+      navigate('/dashboard'); // else go to form page
+    }
   };
 
   return (

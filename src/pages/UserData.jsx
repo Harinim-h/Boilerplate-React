@@ -1,93 +1,56 @@
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const statesWithCities = {
-  'Tamil Nadu': ['Chennai', 'Coimbatore', 'Trichy', 'Karur'],
-  'Karnataka': ['Bangalore', 'Mysore', 'Mangalore'],
-  'Kerala': ['Kochi', 'Thiruvananthapuram', 'Kozhikode'],
-};
-
-export default function Dashboard() {
+export default function UserData() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    state: '',
-    city: '',
-  });
+  const userData = JSON.parse(localStorage.getItem('userDetails'));
 
-  // 🔁 On mount, check if already filled and not editing
-  useEffect(() => {
-    const editing = localStorage.getItem('editing'); // if set, we're editing
-    const userDetails = localStorage.getItem('userDetails');
+  if (!userData) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-xl">
+        No user data found.
+      </div>
+    );
+  }
 
-    if (userDetails && !editing) {
-      navigate('/userdata'); // not editing but data exists → redirect
-    }
-
-    if (userDetails && editing) {
-      const parsed = JSON.parse(userDetails);
-      setForm(parsed); // pre-fill form with existing data
-    }
-  }, []);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+  const handleEdit = () => {
+    localStorage.setItem('editing', 'true'); // set editing flag
+    navigate('/dashboard'); // go to dashboard for editing
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    localStorage.setItem('userDetails', JSON.stringify(form));
-    localStorage.removeItem('editing'); // Done editing
-    navigate('/userdata');
+  const handleDelete = () => {
+    localStorage.removeItem('userDetails');
+    localStorage.removeItem('editing'); // just in case
+    alert('User data deleted.');
+    navigate('/dashboard'); // redirect to form after delete
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-sky-100">
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4 text-sky-800">Enter Your Details</h2>
+    <div className="min-h-screen bg-sky-100 flex items-center justify-center">
+      <div className="bg-white p-6 rounded shadow max-w-md w-full">
+        <h2 className="text-2xl font-bold mb-4 text-sky-800 text-center">Your Submitted Details</h2>
+        <ul className="text-sky-700 mb-4">
+          <li><strong>Name:</strong> {userData.name}</li>
+          <li><strong>Phone:</strong> {userData.phone}</li>
+          <li><strong>Email:</strong> {userData.email}</li>
+          <li><strong>State:</strong> {userData.state}</li>
+          <li><strong>City:</strong> {userData.city}</li>
+        </ul>
 
-        <input name="name" value={form.name} onChange={handleChange} required
-          placeholder="Name"
-          className="w-full p-2 mb-3 border border-sky-300 rounded"
-        />
-
-        <input name="phone" value={form.phone} onChange={handleChange} required
-          placeholder="Phone Number"
-          className="w-full p-2 mb-3 border border-sky-300 rounded"
-        />
-
-        <input name="email" value={form.email} onChange={handleChange} required
-          placeholder="Email"
-          className="w-full p-2 mb-3 border border-sky-300 rounded"
-        />
-
-        <select name="state" value={form.state} onChange={handleChange} required
-          className="w-full p-2 mb-3 border border-sky-300 rounded"
-        >
-          <option value="">Select State</option>
-          {Object.keys(statesWithCities).map((state) => (
-            <option key={state} value={state}>{state}</option>
-          ))}
-        </select>
-
-        <select name="city" value={form.city} onChange={handleChange} required
-          className="w-full p-2 mb-3 border border-sky-300 rounded"
-          disabled={!form.state}
-        >
-          <option value="">Select City</option>
-          {form.state &&
-            statesWithCities[form.state].map((city) => (
-              <option key={city} value={city}>{city}</option>
-            ))}
-        </select>
-
-        <button type="submit" className="w-full bg-sky-500 text-white py-2 rounded hover:bg-sky-600">
-          Submit
-        </button>
-      </form>
+        <div className="flex justify-between">
+          <button
+            onClick={handleEdit}
+            className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+          >
+            Edit
+          </button>
+          <button
+            onClick={handleDelete}
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
