@@ -36,10 +36,10 @@ export default function AppRoutes() {
         <NavLink
           to="/login"
           className={({ isActive }) =>
-            `px-4 py-2 rounded font-semibold transition-colors ${
+            `px-4 py-2 rounded font-bold transition-colors ${
               isActive
-                ? 'bg-blue-600 hover:bg-blue-300'
-                : 'bg-blue-500 hover:bg-blue-600'
+                ? 'bg-purple-500 hover:bg-blue-600'
+                : 'bg-purple-500 hover:bg-blue-600'
             }`
           }
         >

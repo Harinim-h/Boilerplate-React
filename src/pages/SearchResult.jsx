@@ -24,7 +24,7 @@ export default function SearchResult() {
     <div className="min-h-screen flex flex-col items-center justify-center bg-purple-100 p-10">
       <h2 className="text-3xl font-bold mb-6 text-purple-950">Searched User Details</h2>
 
-      <div className="bg-purple-200 p-6 rounded shadow max-w-xl w-full mb-6">
+      <div className="bg-purple-300 p-6 rounded shadow max-w-xl w-full mb-6">
         <ul className="text-purple-950 text-2xl">
           <li><strong>Name:</strong> {user.name}</li>
           <li><strong>Phone:</strong> {user.phone}</li>

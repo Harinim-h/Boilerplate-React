@@ -99,23 +99,23 @@ export default function UserData() {
       <div className="flex space-x-4 mb-6">
         <button
           onClick={() => setSortOrder('asc')}
-          className={`px-6 py-2 rounded text-xl ${
+          className={`px-6 py-2 rounded text-xl border ${
             sortOrder === 'asc'
               ? 'bg-purple-950 text-white'
-              : 'bg-purple-300 text-purple-700 hover:bg-purple-400'
+              : 'bg-purple-300 text-purple-950 hover:bg-purple-400 border-purple-950'
           }`}
         >
-          Sort Name Asc
+          SORT[Name Asc]
         </button>
         <button
           onClick={() => setSortOrder('desc')}
-          className={`px-6 py-2 rounded text-xl ${
+          className={`px-6 py-2 rounded text-xl border ${
             sortOrder === 'desc'
-              ? 'bg-purple-950 text-white'
-              : 'bg-purple-300 text-purple-700 hover:bg-purple-400'
+              ? 'bg-purple-950 text-white border-purple-950'
+              : 'bg-purple-300 text-purple-950 hover:bg-purple-400 border-purple-950'
           }`}
         >
-          Sort Name Desc
+          SORT[Name Desc]
         </button>
       </div>
 
