@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 export default function UserData() {
   const navigate = useNavigate();
   const [allUsers, setAllUsers] = useState({});
+  const [searchQuery, setSearchQuery] = useState(''); // 🔹 State to hold search input
 
   useEffect(() => {
     const storedUsers = JSON.parse(localStorage.getItem('allUserDetails') || '{}');
@@ -11,7 +12,7 @@ export default function UserData() {
   }, []);
 
   const handleAddUser = () => {
-    localStorage.removeItem('editingUserEmail'); // clear editing flag for new user
+    localStorage.removeItem('editingUserEmail');
     navigate('/dashboard');
   };
 
@@ -25,6 +26,21 @@ export default function UserData() {
     delete updatedUsers[email];
     localStorage.setItem('allUserDetails', JSON.stringify(updatedUsers));
     setAllUsers(updatedUsers);
+  };
+
+  // 🔹 Search submit function
+  const handleSearch = () => {
+    const users = Object.values(allUsers);
+    const result = users.find(
+      (user) => user.name.toLowerCase() === searchQuery.trim().toLowerCase()
+    );
+
+    if (result) {
+      localStorage.setItem('searchedUser', JSON.stringify(result));
+      navigate('/searchresult');
+    } else {
+      alert('User not found');
+    }
   };
 
   if (Object.keys(allUsers).length === 0) {
@@ -45,12 +61,29 @@ export default function UserData() {
     <div className="min-h-screen bg-sky-100 flex flex-col items-center py-10">
       <h2 className="text-3xl font-bold mb-6 text-purple-950">User Details</h2>
 
-      <button
-        onClick={handleAddUser}
-        className="mb-6 bg-purple-950 text-white px-6 py-3 rounded hover:bg-sky-600 text-xl"
-      >
-        ADD
-      </button>
+      <div className="flex space-x-4 mb-6">
+        <button
+          onClick={handleAddUser}
+          className="bg-purple-950 text-white px-6 py-3 rounded hover:bg-sky-600 text-xl"
+        >
+          ADD
+        </button>
+
+        {/* 🔹 Search input + button */}
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search by Name"
+          className="px-4 py-2 rounded border border-purple-400 text-xl"
+        />
+        <button
+          onClick={handleSearch}
+          className="bg-purple-950 text-white px-4 py-2 rounded hover:bg-sky-600 text-xl"
+        >
+          Search
+        </button>
+      </div>
 
       <div className="bg-purple-200 p-6 rounded shadow max-w-3xl w-auto">
         {Object.values(allUsers).map((user) => (
