@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 export default function UserData() {
   const navigate = useNavigate();
   const [allUsers, setAllUsers] = useState({});
-  const [searchQuery, setSearchQuery] = useState(''); // 🔹 State to hold search input
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortOrder, setSortOrder] = useState('asc'); // 'asc' or 'desc' for name sorting
 
   useEffect(() => {
     const storedUsers = JSON.parse(localStorage.getItem('allUserDetails') || '{}');
@@ -28,7 +29,6 @@ export default function UserData() {
     setAllUsers(updatedUsers);
   };
 
-  // 🔹 Search submit function
   const handleSearch = () => {
     const users = Object.values(allUsers);
     const result = users.find(
@@ -57,11 +57,22 @@ export default function UserData() {
     );
   }
 
+  // Sort users by name based on sortOrder
+  const sortedUsers = Object.values(allUsers).sort((a, b) => {
+    if (!a.name) return 1;
+    if (!b.name) return -1;
+    if (sortOrder === 'asc') {
+      return a.name.localeCompare(b.name);
+    } else {
+      return b.name.localeCompare(a.name);
+    }
+  });
+
   return (
     <div className="min-h-screen bg-sky-100 flex flex-col items-center py-10">
       <h2 className="text-3xl font-bold mb-6 text-purple-950">User Details</h2>
 
-      <div className="flex space-x-4 mb-6">
+      <div className="flex space-x-4 mb-2 items-center">
         <button
           onClick={handleAddUser}
           className="bg-purple-950 text-white px-6 py-3 rounded hover:bg-sky-600 text-xl"
@@ -69,7 +80,6 @@ export default function UserData() {
           ADD
         </button>
 
-        {/* 🔹 Search input + button */}
         <button
           onClick={handleSearch}
           className="bg-purple-950 text-white px-4 py-2 rounded hover:bg-sky-600 text-xl"
@@ -83,11 +93,34 @@ export default function UserData() {
           placeholder="Search by Name"
           className="px-4 py-2 rounded border text-xl"
         />
-        
+      </div>
+
+      {/* New line for sorting buttons */}
+      <div className="flex space-x-4 mb-6">
+        <button
+          onClick={() => setSortOrder('asc')}
+          className={`px-6 py-2 rounded text-xl ${
+            sortOrder === 'asc'
+              ? 'bg-purple-950 text-white'
+              : 'bg-purple-300 text-purple-700 hover:bg-purple-400'
+          }`}
+        >
+          Sort Name Asc
+        </button>
+        <button
+          onClick={() => setSortOrder('desc')}
+          className={`px-6 py-2 rounded text-xl ${
+            sortOrder === 'desc'
+              ? 'bg-purple-950 text-white'
+              : 'bg-purple-300 text-purple-700 hover:bg-purple-400'
+          }`}
+        >
+          Sort Name Desc
+        </button>
       </div>
 
       <div className="bg-purple-200 p-6 rounded shadow max-w-3xl w-auto">
-        {Object.values(allUsers).map((user) => (
+        {sortedUsers.map((user) => (
           <div
             key={user.email}
             className="mb-9 border-b border-purple-300 pb-4 last:border-b-0"
