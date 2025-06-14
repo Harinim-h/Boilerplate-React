@@ -70,19 +70,20 @@ export default function UserData() {
         </button>
 
         {/* 🔹 Search input + button */}
+        <button
+          onClick={handleSearch}
+          className="bg-purple-950 text-white px-4 py-2 rounded hover:bg-sky-600 text-xl"
+        >
+          SEARCH
+        </button>
         <input
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search by Name"
-          className="px-4 py-2 rounded border border-purple-400 text-xl"
+          className="px-4 py-2 rounded border text-xl"
         />
-        <button
-          onClick={handleSearch}
-          className="bg-purple-950 text-white px-4 py-2 rounded hover:bg-sky-600 text-xl"
-        >
-          Search
-        </button>
+        
       </div>
 
       <div className="bg-purple-200 p-6 rounded shadow max-w-3xl w-auto">
@@ -104,13 +105,13 @@ export default function UserData() {
                 onClick={() => handleEdit(user.email)}
                 className="bg-purple-950 text-white px-4 py-2 rounded hover:bg-blue-600"
               >
-                Edit
+                EDIT
               </button>
               <button
                 onClick={() => handleDelete(user.email)}
                 className="bg-purple-950 text-white px-4 py-2 rounded hover:bg-blue-600"
               >
-                Delete
+                DELETE
               </button>
             </div>
           </div>
