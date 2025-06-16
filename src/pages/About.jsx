@@ -6,7 +6,7 @@ export default function About() {
       </h1>
       <p className="max-w-xl drop-shadow  text-center text-purple-950 text-lg leading-relaxed">
         This is a <strong>React frontend Boilerplate.</strong><br /><br />
-        This assignment uses <strong>Vite</strong> or <strong>Create React App</strong> to initialize the project.<br />
+        This assignment uses <strong>Vite</strong> or <strong>create React App</strong> to initialize the project.<br />
         Install <strong>Tailwind CSS</strong> for styling.<br />
         Add <strong>React Router</strong> for page navigation.
       </p>
