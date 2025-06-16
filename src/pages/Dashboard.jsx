@@ -60,7 +60,7 @@ export default function Dashboard() {
     <div className="min-h-screen flex items-center justify-center bg-purple-500">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded shadow w-full max-w-md bg-purple-200"
+        className="bg-white-100 p-6 rounded shadow w-full max-w-md bg-purple-200"
       >
         <h2 className="text-2xl font-bold mb-4 text-purple-950">Enter Details</h2>
 
