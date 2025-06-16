@@ -1,3 +1,4 @@
+// 👇 Your existing imports
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,12 +14,12 @@ export default function Dashboard() {
     name: '',
     phone: '',
     email: '',
+    dob: '',      // 👈 Add this line
     state: '',
     city: '',
   });
 
   useEffect(() => {
-    // If editing existing user detail, prefill form
     const editingEmail = localStorage.getItem('editingUserEmail');
     if (editingEmail) {
       const allUserDetails = JSON.parse(localStorage.getItem('allUserDetails') || '{}');
@@ -31,7 +32,6 @@ export default function Dashboard() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === 'state') {
-      // Reset city when state changes
       setForm({ ...form, state: value, city: '' });
     } else {
       setForm({ ...form, [name]: value });
@@ -40,19 +40,10 @@ export default function Dashboard() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Get existing allUserDetails or empty object
     const allUserDetails = JSON.parse(localStorage.getItem('allUserDetails') || '{}');
-
-    // Save/update current user's details using email as key
     allUserDetails[form.email] = form;
-
-    // Save all details back to localStorage
     localStorage.setItem('allUserDetails', JSON.stringify(allUserDetails));
-
-    // Clear editing flag if any
     localStorage.removeItem('editingUserEmail');
-
     navigate('/userdata');
   };
 
@@ -89,7 +80,18 @@ export default function Dashboard() {
           required
           placeholder="Email"
           className="w-full p-2 mb-3 border border-purple-200 rounded"
-          disabled={!!localStorage.getItem('editingUserEmail')} // Prevent email change while editing
+          disabled={!!localStorage.getItem('editingUserEmail')}
+        />
+
+        {/* ✅ DOB Field with calendar */}
+        <label className="text-sm text-purple-950 font-medium mb-1">Date of Birth</label>
+        <input
+          type="date"
+          name="dob"
+          value={form.dob}
+          onChange={handleChange}
+          required
+          className="w-full p-2 mb-3 border border-purple-200 rounded"
         />
 
         <select
